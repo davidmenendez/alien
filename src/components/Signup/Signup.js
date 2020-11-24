@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextInput from '../TextInput';
+import useInput from '../../hooks/useInput';
 import './Signup.css';
 
 const Signup = () => {
-  const [name, setName] = useState('test');
-  const [email, setEmail] = useState('test@aol.com');
-  const [password, setPassword] = useState('test1234');
+  const name = useInput('test');
+  const email = useInput('test@aol.com');
+  const password = useInput('test1234');
 
   return (
     <section className="signup">
@@ -16,26 +17,26 @@ const Signup = () => {
         <TextInput
           id="name"
           label="name"
-          onChange={setName}
+          onChange={name.onChange}
           placeholder="name"
           type="text"
-          value={name}
+          value={name.value}
         />
         <TextInput
           id="email"
           label="email"
-          onChange={setEmail}
+          onChange={email.onChange}
           placeholder="email"
           type="email"
-          value={email}
+          value={email.value}
         />
         <TextInput
           id="password"
           label="password"
-          onChange={setPassword}
+          onChange={password.onChange}
           placeholder="password"
           type="password"
-          value={password}
+          value={password.value}
         />
         <button>join</button>
       </div>

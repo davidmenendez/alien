@@ -9,17 +9,15 @@ const TextInput = ({
   type,
   value,
 }) => {
-  const onChangeHandler = e => onChange(e.target.value);
-
   return (
     <div className="text-input">
-      <label for={id}>{label}</label>
+      <label htmlFor={id}>{label}</label>
       <input
         name={id}
         id={id}
         type={type}
         placeholder={placeholder}
-        onChange={onChangeHandler}
+        onChange={onChange}
         value={value}
       />
     </div>
