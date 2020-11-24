@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState('');
   const email = useInput('test@aol.com');
   const password = useInput('test1234');
+
+  const onClickHandler = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api');
+      if (!response.ok) throw new Error(response.status);
+      const { data } = await response.json();
+      setData(data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.error('something went wrong!', err);
+    }
+  };
 
   return (
     <section className="signup">
@@ -29,7 +45,9 @@ const Login = () => {
           type="password"
           value={password.value}
         />
-        <button className="button button--primary">Log in</button>
+        <button onClick={onClickHandler} className="button button--primary">Log in</button>
+        {loading && <p>loading...</p>}
+        {data && <p>{data}</p>}
         <hr />
         <Link to="/signup">Don't have an account? Create one</Link>
       </div>
