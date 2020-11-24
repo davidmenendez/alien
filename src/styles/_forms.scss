@@ -3,7 +3,8 @@ label {
   margin-bottom: .5rem;
 }
 
-input {
+input,
+select {
   display: block;
   width: 100%;
   font-family: inherit;
@@ -15,9 +16,9 @@ input {
   border: 1px solid #ccc;
 }
 
-button {
+.button {
   border-radius: 4px;
-  background: $green;
+  background: #666;
   font-family: inherit;
   border: 1px solid transparent;
   font-weight: 400;
@@ -27,5 +28,18 @@ button {
   display: block;
   width: 100%;
   cursor: pointer;
+  margin-bottom: 1rem;
+
+  &--primary {
+    background: $green;
+  }
+
+  &--secondary {
+    background: #333;
+    color: #fff;
+  }
+}
+
+.form-input {
   margin-bottom: 1rem;
 }

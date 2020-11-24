@@ -1,38 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Select from '../Select';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
-import './Signup.scss';
 
-const Signup = () => {
-  const name = useInput('test');
-  const color = useInput('red');
+const Login = () => {
   const email = useInput('test@aol.com');
   const password = useInput('test1234');
-  const colors = ['red', 'green', 'blue', 'grey'];
 
   return (
     <section className="signup">
       <div className="signup-container">
         <h1>ALIEN!</h1>
         <h2>Welcome to the battle</h2>
-        <h3>Sign up below</h3>
-        <TextInput
-          id="name"
-          label="name"
-          onChange={name.onChange}
-          placeholder="name"
-          type="text"
-          value={name.value}
-        />
-        <Select
-          id="color"
-          label="color"
-          onChange={color.onChange}
-          options={colors}
-          value={color.value}
-        />
+        <h3>Login</h3>
         <TextInput
           id="email"
           label="email"
@@ -49,12 +29,12 @@ const Signup = () => {
           type="password"
           value={password.value}
         />
-        <button className="button button--primary">Join</button>
+        <button className="button button--primary">Log in</button>
         <hr />
-        <Link to="/">Have an account? Log in</Link>
+        <Link to="/signup">Don't have an account? Create one</Link>
       </div>
     </section>
-  );
+  )
 };
 
-export default Signup;
+export default Login;

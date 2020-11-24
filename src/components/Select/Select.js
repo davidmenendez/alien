@@ -1,27 +1,26 @@
 import React from 'react';
-import './TextInput.scss';
+import './Select.scss';
 
-const TextInput = ({
+const Select = ({
   id,
   label,
   onChange,
-  placeholder,
-  type,
+  options,
   value,
 }) => {
   return (
     <div className="form-input">
       <label htmlFor={id}>{label}</label>
-      <input
+      <select
         name={id}
         id={id}
-        type={type}
-        placeholder={placeholder}
         onChange={onChange}
         value={value}
-      />
+      >
+        {options.map(option => <option key={option} value={option}>{option}</option>)}
+      </select>
     </div>
   );
 };
 
-export default TextInput;
+export default Select;
