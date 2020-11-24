@@ -1,7 +1,7 @@
 import React from 'react';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
-import './Signup.css';
+import './Signup.scss';
 
 const Signup = () => {
   const name = useInput('test');
