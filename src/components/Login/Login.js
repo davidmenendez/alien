@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import {
+  Link,
+  useHistory,
+  Redirect,
+} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
 
 const Login = () => {
+  const user = useSelector(state => state.user);
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const email = useInput('flamer@aol.com');
@@ -33,6 +39,8 @@ const Login = () => {
       console.error('something went wrong!', err);
     }
   };
+
+  if (user.loggedIn) return <Redirect to="/home" />;
 
   return (
     <section className="signup">

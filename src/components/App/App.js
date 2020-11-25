@@ -14,9 +14,9 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Login} exact />
-        <Route path="/signup" component={Signup} exact />
-        <PrivateRoute path="/home" component={Home} exact />
+        <Route exact path="/" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <PrivateRoute exact path="/home" component={Home} />
       </Switch>
     </Router>
   );

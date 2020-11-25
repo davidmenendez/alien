@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import {
+  Link,
+  useHistory,
+  Redirect,
+} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Select from '../Select';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
 import './Signup.scss';
 
 const Signup = () => {
+  const user = useSelector(state => state.user);
   const history = useHistory();
   const [loading, setLoading] = useState('');
   const [error, setError] = useState('');
@@ -43,6 +49,8 @@ const Signup = () => {
       console.error('signup error!!', err.message);
     }
   };
+
+  if (user.loggedIn) return <Redirect to="/home" />;
 
   return (
     <section className="signup">

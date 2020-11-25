@@ -38,3 +38,16 @@ exports.login = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.getUser = async (req, res, next) => {
+  try {
+    const { email } = req.user;
+    const user = await User.findOne({ email });
+    console.log()
+    if (!user) return res.status(400).send({ error: 'user not found' });
+    return res.status(200).json({ user });
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }
+};

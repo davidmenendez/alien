@@ -5,6 +5,9 @@ import App from './components/App';
 import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { fetchUser } from './features/user/userSlice';
+
+store.dispatch(fetchUser());
 
 ReactDOM.render(
   <React.StrictMode>
