@@ -10,10 +10,15 @@ import './Nav.scss';
 const Nav = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const links = [{
-    name: 'Home',
-    path: '/',
-  }];
+  const links = [
+    {
+      name: 'Home',
+      path: '/home',
+    }, {
+      name: 'Search',
+      path: '/search',
+    },
+  ];
   const logoutHandler = e => {
     e.preventDefault();
     localStorage.removeItem('alienToken');
@@ -29,7 +34,7 @@ const Nav = () => {
             <NavLink
               key={link.name}
               to={link.path}
-              activeClassName="nav--selected"
+              activeClassName="nav--active"
               className="nav-link"
             >
               {link.name}

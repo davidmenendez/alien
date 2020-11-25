@@ -55,3 +55,14 @@ exports.getUser = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.findUser = async (req, res, next) => {
+  try {
+    const { name } = req.query;
+    const query = new RegExp(name, 'i');
+    const results = await User.find({ name: query }, { password: 0 });
+    return res.status(200).json({ results });
+  } catch (err) {
+    return next(err);
+  }
+};
