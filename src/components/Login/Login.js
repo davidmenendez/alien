@@ -1,22 +1,33 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
 
 const Login = () => {
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState('');
-  const email = useInput('test@aol.com');
-  const password = useInput('test1234');
+  const email = useInput('flamer@aol.com');
+  const password = useInput('flame123');
 
   const onClickHandler = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api');
-      if (!response.ok) throw new Error(response.status);
-      const { data } = await response.json();
-      setData(data);
+      const response = await fetch('/api/user/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email.value,
+          password: password.value,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const json = await response.json();
+      if (!response.ok) throw new Error(json.error);
       setLoading(false);
+      const token = json.data;
+      localStorage.setItem('alienToken', token);
+      history.push('/home');
     } catch (err) {
       setLoading(false);
       console.error('something went wrong!', err);
@@ -47,7 +58,6 @@ const Login = () => {
         />
         <button onClick={onClickHandler} className="button button--primary">Log in</button>
         {loading && <p>loading...</p>}
-        {data && <p>{data}</p>}
         <hr />
         <Link to="/signup">Don't have an account? Create one</Link>
       </div>

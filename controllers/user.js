@@ -22,3 +22,19 @@ exports.register = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const validBody = email && password;
+    if (!validBody) return res.status(400).send({ error: 'invalid body' });
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).send({ error: 'user not found' });
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) return res.status(400).send({ error: 'invalid login' });
+    const token = generateAccessToken(email);
+    return res.status(200).json({ data: token });
+  } catch (err) {
+    return next(err);
+  }
+};

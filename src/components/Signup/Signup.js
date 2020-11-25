@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Select from '../Select';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
 import './Signup.scss';
 
 const Signup = () => {
+  const history = useHistory();
   const [loading, setLoading] = useState('');
   const [error, setError] = useState('');
-  const name = useInput('test');
+  const name = useInput('flamer');
   const color = useInput('red');
-  const email = useInput('test@aol.com');
-  const password = useInput('test1234');
+  const email = useInput('flamer@aol.com');
+  const password = useInput('flame123');
   const colors = ['red', 'green', 'blue', 'grey'];
 
   const onClickHandler = async () => {
     setLoading(true);
     if (error) setError('');
     try {
-      const response = await fetch('/api/user', {
+      const response = await fetch('/api/user/register', {
         method: 'POST',
         body: JSON.stringify({
           name: name.value,
@@ -30,11 +31,12 @@ const Signup = () => {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response);
       const json = await response.json();
       if (!response.ok) throw new Error(json.error);
       setLoading(false);
-      console.log(json);
+      const token = json.data;
+      localStorage.setItem('alienToken', token);
+      history.push('/home');
     } catch (err) {
       setLoading(false);
       setError(err.message);
