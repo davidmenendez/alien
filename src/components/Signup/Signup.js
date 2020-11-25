@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Select from '../Select';
 import TextInput from '../TextInput';
@@ -6,11 +6,41 @@ import useInput from '../../hooks/useInput';
 import './Signup.scss';
 
 const Signup = () => {
+  const [loading, setLoading] = useState('');
+  const [error, setError] = useState('');
   const name = useInput('test');
   const color = useInput('red');
   const email = useInput('test@aol.com');
   const password = useInput('test1234');
   const colors = ['red', 'green', 'blue', 'grey'];
+
+  const onClickHandler = async () => {
+    setLoading(true);
+    if (error) setError('');
+    try {
+      const response = await fetch('/api/user', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: name.value,
+          color: color.value,
+          email: email.value,
+          password: password.value,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response);
+      const json = await response.json();
+      if (!response.ok) throw new Error(json.error);
+      setLoading(false);
+      console.log(json);
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+      console.error('signup error!!', err.message);
+    }
+  };
 
   return (
     <section className="signup">
@@ -49,7 +79,9 @@ const Signup = () => {
           type="password"
           value={password.value}
         />
-        <button className="button button--primary">Join</button>
+        <button onClick={onClickHandler} className="button button--primary">Join</button>
+        {loading && <p>loading...</p>}
+        {error && <p>{error}</p>}
         <hr />
         <Link to="/">Have an account? Log in</Link>
       </div>
