@@ -43,11 +43,15 @@ exports.getUser = async (req, res, next) => {
   try {
     const { email } = req.user;
     const user = await User.findOne({ email });
-    console.log()
     if (!user) return res.status(400).send({ error: 'user not found' });
-    return res.status(200).json({ user });
+    const data = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      color: user.color,
+    };
+    return res.status(200).json({ user: data });
   } catch (err) {
-    console.log(err);
     return next(err);
   }
 };

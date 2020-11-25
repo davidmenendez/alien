@@ -1,3 +1,5 @@
+@import '../styles/colors';
+
 *,
 *::before,
 *::after {
@@ -17,4 +19,14 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   background: #111;
+  color: #fff;
+}
+
+a {
+  color: $green;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

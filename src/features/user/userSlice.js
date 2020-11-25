@@ -21,8 +21,8 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async data => {
     if (token) localStorage.removeItem('alienToken');
     return Promise.reject(response.statusText);
   }
-  const json = await response.json();
-  return json.data;
+  const { user } = await response.json();
+  return user;
 });
 
 export const userSlice = createSlice({

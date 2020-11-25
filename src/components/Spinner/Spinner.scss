@@ -1,0 +1,28 @@
+@import '../../styles/colors';
+
+.spinner {
+  height: 5rem;
+  width: 5rem;
+  display: inline-block;
+
+  &:after {
+    content: '';
+    display: block;
+    border: 4px solid $green;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1000ms infinite linear;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

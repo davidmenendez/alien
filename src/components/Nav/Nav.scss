@@ -1,0 +1,33 @@
+@import '../../styles/colors';
+
+.nav {
+  background: #222;
+  padding: .5rem 0;
+
+  h1 {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    margin-bottom: 0;
+    font-weight: 700;
+    color: $green;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &--selected {
+    text-decoration: underline;
+  }
+
+  &-links {
+    display: flex;
+    margin: 0 -1rem;
+  }
+
+  &-link {
+    padding: 0 1rem;
+  }
+}

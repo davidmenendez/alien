@@ -4,11 +4,16 @@ import {
   useHistory,
   Redirect,
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {
+  useSelector,
+  useDispatch,
+} from 'react-redux';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
+import { fetchUser } from '../../features/user/userSlice';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const history = useHistory();
   const [loading, setLoading] = useState(false);
@@ -33,6 +38,7 @@ const Login = () => {
       setLoading(false);
       const token = json.data;
       localStorage.setItem('alienToken', token);
+      dispatch(fetchUser());
       history.push('/home');
     } catch (err) {
       setLoading(false);
