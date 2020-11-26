@@ -19,8 +19,8 @@ const Search = () => {
   };
   return (
     <Page>
-      <h3>search</h3>
-      <p>find other aliens</p>
+      <h3>Search</h3>
+      <p>Find other aliens</p>
       <TextInput
         id="name"
         label="name"

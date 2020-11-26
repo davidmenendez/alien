@@ -60,7 +60,12 @@ exports.findUser = async (req, res, next) => {
   try {
     const { name } = req.query;
     const query = new RegExp(name, 'i');
-    const results = await User.find({ name: query }, { password: 0 });
+    const data = await User.find({ name: query });
+    const results = data.map(entry => ({
+      id: entry._id,
+      email: entry.email,
+      name: entry.name,
+    }));
     return res.status(200).json({ results });
   } catch (err) {
     return next(err);
