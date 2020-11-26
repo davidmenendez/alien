@@ -2,6 +2,7 @@ import {
   createSlice,
   createAsyncThunk,
 } from '@reduxjs/toolkit';
+import api from '../../utils/api';
 
 const initialState = {
   loggedIn: false,
@@ -11,13 +12,9 @@ const initialState = {
 };
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async data => {
-  const token = localStorage.getItem('alienToken');
-  const response = await fetch('/api/user', {
-    headers: {
-      'authorization': `Bearer ${token}`,
-    },
-  });
+  const response = await api('user');
   if (!response.ok) {
+    const token = localStorage.getItem('alienToken');
     if (token) localStorage.removeItem('alienToken');
     return Promise.reject(response.statusText);
   }

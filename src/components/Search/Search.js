@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Page from '../Page';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
+import api from '../../utils/api';
 
 const Search = () => {
   const name = useInput('');
@@ -9,12 +10,7 @@ const Search = () => {
   const onClickHandler = async () => {
     if (!name.value) return;
     try {
-      const token = localStorage.getItem('alienToken');
-      const response = await fetch(`/api/user/findUser?name=${name.value}`, {
-        headers: {
-          'authorization': `Bearer ${token}`,
-        },
-      });
+      const response = await api(`user/findUser?name=${name.value}`);
       const json = await response.json();
       setResults(json.results);
     } catch (err) {

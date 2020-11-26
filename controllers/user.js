@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const generateAccessToken = email => {
-  return jwt.sign({ email }, 'alienzRule1995', { expiresIn: '30m' });
+  return jwt.sign({ email }, 'alienzRule1995', { expiresIn: '1h' });
 };
 
 exports.register = async (req, res, next) => {

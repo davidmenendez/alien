@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Spinner from '../Spinner';
 import Nav from '../Nav';
@@ -9,6 +10,7 @@ const Page = ({
   className,
 }) => {
   const { status } = useSelector(state => state.user);
+  if (status === 'failed') return <Redirect to="/" />;
   return (
     <div className={['page', className].join(' ')}>
       <Nav />
