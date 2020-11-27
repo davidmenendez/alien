@@ -11,6 +11,7 @@ import {
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
 import { fetchUser } from '../../features/user/userSlice';
+import Button from '../Button';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -70,7 +71,13 @@ const Login = () => {
           type="password"
           value={password.value}
         />
-        <button onClick={onClickHandler} className="button button--primary">Log in</button>
+        <Button
+          onClick={onClickHandler}
+          type="primary"
+          disabled={!email.value || !password.value}
+        >
+          Log in
+        </Button>
         {loading && <p>loading...</p>}
         <hr />
         <Link to="/signup">Don't have an account? Create one</Link>

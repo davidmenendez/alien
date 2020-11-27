@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import Select from '../Select';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
+import Button from '../Button';
 import './Signup.scss';
 
 const Signup = () => {
@@ -50,6 +51,13 @@ const Signup = () => {
     }
   };
 
+  const buttonDisabled = (
+    !name.value ||
+    !color.value ||
+    !email.value ||
+    !password.value
+  );
+
   if (user.loggedIn) return <Redirect to="/home" />;
 
   return (
@@ -89,7 +97,13 @@ const Signup = () => {
           type="password"
           value={password.value}
         />
-        <button onClick={onClickHandler} className="button button--primary">Join</button>
+        <Button
+          onClick={onClickHandler}
+          type="primary"
+          disabled={buttonDisabled}
+        >
+          Join
+        </Button>
         {loading && <p>loading...</p>}
         {error && <p>{error}</p>}
         <hr />

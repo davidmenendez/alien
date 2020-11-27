@@ -8,8 +8,7 @@ const TextInput = ({
   placeholder,
   type,
   value,
-}) => {
-  return (
+}) => (
     <div className="form-input">
       <label htmlFor={id}>{label}</label>
       <input
@@ -22,6 +21,5 @@ const TextInput = ({
       />
     </div>
   );
-};
 
 export default TextInput;

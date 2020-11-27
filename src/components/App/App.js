@@ -9,6 +9,7 @@ import Signup from '../Signup';
 import Login from '../Login';
 import Home from '../Home';
 import Search from '../Search';
+import Arena from '../Arena';
 import './App.scss';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/signup" component={Signup} />
         <PrivateRoute exact path="/home" component={Home} />
         <PrivateRoute exact path="/search" component={Search} />
+        <PrivateRoute exact path="/arena" component={Arena} />
       </Switch>
     </Router>
   );

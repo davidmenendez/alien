@@ -10,15 +10,7 @@ import './Nav.scss';
 const Nav = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const links = [
-    {
-      name: 'Home',
-      path: '/home',
-    }, {
-      name: 'Search',
-      path: '/search',
-    },
-  ];
+  const links = ['home', 'search', 'arena'];
   const logoutHandler = e => {
     e.preventDefault();
     localStorage.removeItem('alienToken');
@@ -32,12 +24,12 @@ const Nav = () => {
         <div className="nav-links">
           {links.map(link => (
             <NavLink
-              key={link.name}
-              to={link.path}
+              key={link}
+              to={`/${link}`}
               activeClassName="nav--active"
               className="nav-link"
             >
-              {link.name}
+              {link}
             </NavLink>
           ))}
           <a href="/" className="nav-link" onClick={logoutHandler}>Log out</a>
