@@ -18,6 +18,7 @@ const TextInput = ({
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        className="input"
       />
     </div>
   );

@@ -20,7 +20,7 @@ const Arena = () => {
   return (
     <Page withSidebar>
       <h2>Welcome to the arena!</h2>
-      <p>Choose your challenge level</p>
+      <h3>Choose your challenge level</h3>
       <Select
         id="level"
         label="Level"

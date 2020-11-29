@@ -16,6 +16,7 @@ const Select = ({
         id={id}
         onChange={onChange}
         value={value}
+        className="input"
       >
         {options.map(option => <option key={option} value={option}>{option}</option>)}
       </select>

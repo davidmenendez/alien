@@ -5,10 +5,11 @@ import './Sidebar.scss';
 
 const Sidebar = () => {
   const { user } = useSelector(state => state.user);
+  const { name, color } = user;
   return (
     <aside className="sidebar">
-      <AlienIcon fill="red" />
-      <p>{user.name}</p>
+      <AlienIcon fill={color} />
+      <p>{name}</p>
     </aside>
   );
 };

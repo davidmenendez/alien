@@ -58,6 +58,7 @@ exports.getUser = async (req, res, next) => {
       color: user.color,
       age: getAge(user.created_at),
       credits: user.credits,
+      level: user.level,
     };
     return res.status(200).json({ user: data });
   } catch (err) {
@@ -72,7 +73,7 @@ exports.findUser = async (req, res, next) => {
     const data = await User.find({ name: query });
     const results = data.map(entry => ({
       id: entry._id,
-      email: entry.email,
+      level: entry.level,
       name: entry.name,
     }));
     return res.status(200).json({ results });

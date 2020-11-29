@@ -12,9 +12,13 @@ const Table = ({
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {cols.map(col => <td key={col}>{rows[col]}</td>)}
-        </tr>
+        {rows.map((row, id) => (
+          <tr key={id}>
+            {cols.map(col => (
+              <td key={col}>{row[col]}</td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   );

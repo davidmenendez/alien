@@ -7,8 +7,6 @@ import './Home.scss';
 
 const Home = () => {
   const { user } = useSelector(state => state.user);
-  const getUserCols = () => Object.keys(user);
-  const cols = getUserCols();
   return (
     <Page>
       <header className="home-header">
@@ -17,8 +15,8 @@ const Home = () => {
       </header>
       <p>user info</p>
       <Table
-        cols={cols}
-        rows={user}
+        cols={Object.keys(user)}
+        rows={[user]}
       />
     </Page >
   );

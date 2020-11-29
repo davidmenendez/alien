@@ -4,7 +4,11 @@ import {
   useHistory,
   Redirect,
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {
+  useSelector,
+  useDispatch,
+} from 'react-redux';
+import { fetchUser } from '../../features/user/userSlice';
 import Select from '../Select';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
@@ -13,6 +17,7 @@ import './Signup.scss';
 
 const Signup = () => {
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState('');
   const [error, setError] = useState('');
@@ -43,6 +48,7 @@ const Signup = () => {
       setLoading(false);
       const token = json.data;
       localStorage.setItem('alienToken', token);
+      dispatch(fetchUser());
       history.push('/home');
     } catch (err) {
       setLoading(false);

@@ -34,6 +34,12 @@ const User = new Schema(
       minlength: 1,
       default: 5000,
     },
+    level: {
+      type: Number,
+      maxlength: 2,
+      minlength: 1,
+      default: 1,
+    },
   },
   {
     timestamps: {
