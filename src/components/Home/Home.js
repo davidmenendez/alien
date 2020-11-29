@@ -2,12 +2,13 @@ import React from 'react';
 import Page from '../Page';
 import { useSelector } from 'react-redux';
 import AlienIcon from '../AlienIcon';
+import Table from '../Table';
 import './Home.scss';
 
 const Home = () => {
   const { user } = useSelector(state => state.user);
   const getUserCols = () => Object.keys(user);
-  const userCols = getUserCols();
+  const cols = getUserCols();
   return (
     <Page>
       <header className="home-header">
@@ -15,18 +16,10 @@ const Home = () => {
         <AlienIcon fill={user.color} />
       </header>
       <p>user info</p>
-      <table className="table">
-        <thead>
-          <tr>
-            {userCols.map(o => <th key={o} scope="col">{o}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {userCols.map(o => <td key={o}>{user[o]}</td>)}
-          </tr>
-        </tbody>
-      </table>
+      <Table
+        cols={cols}
+        rows={user}
+      />
     </Page >
   );
 };
