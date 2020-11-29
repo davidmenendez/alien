@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Page from '../Page';
 import Select from '../Select';
 import useInput from '../../hooks/useInput';
 import Button from '../Button';
+import Spinner from '../Spinner';
+import api from '../../utils/api';
 
 const Arena = () => {
+  const [loading, setLoading] = useState(false);
+  const [log, setLog] = useState(null);
   const level = useInput(1);
   const getLevels = () => {
     const arr = [];
@@ -14,8 +18,17 @@ const Arena = () => {
     return arr;
   }
   const levels = getLevels();
-  const onClickHandler = () => {
-    console.log(level.value);
+  const onClickHandler = async () => {
+    setLoading(true);
+    const response = await api('fight/bot', {
+      method: 'POST',
+      body: JSON.stringify({
+        level: level.value,
+      }),
+    });
+    const { data } = await response.json();
+    setLog(data);
+    setLoading(false);
   };
   return (
     <Page withSidebar>
@@ -34,6 +47,8 @@ const Arena = () => {
       >
         Battle!
       </Button>
+      {loading && <Spinner />}
+      {log && log.map((row, id) => <p key={id}>{row}</p>)}
     </Page>
   );
 };
