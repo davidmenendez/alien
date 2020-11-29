@@ -44,11 +44,19 @@ exports.getUser = async (req, res, next) => {
     const { email } = req.user;
     const user = await User.findOne({ email });
     if (!user) return res.status(400).send({ error: 'user not found' });
+    const getAge = created => {
+      const now = new Date();
+      const then = new Date(created);
+      const days = Math.round(Math.abs((then - now) / (24 * 60 * 60 * 1000)));
+      const years = Math.round(Math.abs((then - now) / (365 * 24 * 60 * 60 * 1000)));
+      return `${years} year(s), ${days} day(s)`;
+    };
     const data = {
       id: user._id,
       name: user.name,
       email: user.email,
       color: user.color,
+      age: getAge(user.created_at),
     };
     return res.status(200).json({ user: data });
   } catch (err) {

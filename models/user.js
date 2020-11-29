@@ -29,6 +29,11 @@ const User = new Schema(
       minlength: 3,
     },
   },
+  {
+    timestamps: {
+      createdAt: 'created_at',
+    },
+  }
 );
 
 module.exports = mongoose.model('Users', User);
