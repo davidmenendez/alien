@@ -26,7 +26,7 @@ const Search = () => {
     try {
       setResults([]);
       setLoading(true);
-      const response = await api(`user/findUser?name=${name.value}`);
+      const response = await api(`user/search?name=${name.value}`);
       const json = await response.json();
       setResults(json.results);
       setLoading(false);

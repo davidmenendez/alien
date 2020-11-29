@@ -16,7 +16,7 @@ const Profile = () => {
     const getProfile = async () => {
       try {
         setLoading(true);
-        const response = await api(`user/getProfile?id=${id}`)
+        const response = await api(`user/profile?id=${id}`)
         const { user } = await response.json();
         setProfile(user);
         setLoading(false);

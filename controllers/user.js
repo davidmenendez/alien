@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const generateAccessToken = id => {
-  return jwt.sign({ id }, 'alienzRule1995', { expiresIn: '1h' });
+  return jwt.sign({ id }, process.env.AUTH_SECRET, { expiresIn: '1h' });
 };
 
 const getAge = created => {
@@ -47,7 +47,7 @@ exports.login = async (req, res, next) => {
   }
 };
 
-exports.getUser = async (req, res, next) => {
+exports.user = async (req, res, next) => {
   try {
     const { id } = req.user;
     const user = await User.findById(id);
@@ -67,7 +67,7 @@ exports.getUser = async (req, res, next) => {
   }
 };
 
-exports.getProfile = async (req, res, next) => {
+exports.profile = async (req, res, next) => {
   try {
     const { id } = req.query;
     console.log(id);
@@ -85,7 +85,7 @@ exports.getProfile = async (req, res, next) => {
   }
 };
 
-exports.findUser = async (req, res, next) => {
+exports.search = async (req, res, next) => {
   try {
     const { name } = req.query;
     const query = new RegExp(name, 'i');
