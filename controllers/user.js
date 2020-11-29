@@ -6,6 +6,14 @@ const generateAccessToken = email => {
   return jwt.sign({ email }, 'alienzRule1995', { expiresIn: '1h' });
 };
 
+const getAge = created => {
+  const now = new Date();
+  const then = new Date(created);
+  const days = Math.round(Math.abs((then - now) / (24 * 60 * 60 * 1000)));
+  const years = Math.round(Math.abs((then - now) / (365 * 24 * 60 * 60 * 1000)));
+  return `${years} year(s), ${days} day(s)`;
+};
+
 exports.register = async (req, res, next) => {
   try {
     const { password, email } = req.body;
@@ -44,13 +52,6 @@ exports.getUser = async (req, res, next) => {
     const { email } = req.user;
     const user = await User.findOne({ email });
     if (!user) return res.status(400).send({ error: 'user not found' });
-    const getAge = created => {
-      const now = new Date();
-      const then = new Date(created);
-      const days = Math.round(Math.abs((then - now) / (24 * 60 * 60 * 1000)));
-      const years = Math.round(Math.abs((then - now) / (365 * 24 * 60 * 60 * 1000)));
-      return `${years} year(s), ${days} day(s)`;
-    };
     const data = {
       id: user._id,
       name: user.name,
@@ -59,6 +60,24 @@ exports.getUser = async (req, res, next) => {
       age: getAge(user.created_at),
       credits: user.credits,
       level: user.level,
+    };
+    return res.status(200).json({ user: data });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.getProfile = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    console.log(id);
+    const user = await User.findById(id);
+    if (!user) return res.status(400).send({ error: 'user not found' });
+    const data = {
+      name: user.name,
+      age: getAge(user.created_at),
+      level: user.level,
+      color: user.color,
     };
     return res.status(200).json({ user: data });
   } catch (err) {

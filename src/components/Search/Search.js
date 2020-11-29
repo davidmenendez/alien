@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Page from '../Page';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
@@ -9,11 +10,21 @@ import Spinner from '../Spinner';
 
 const Search = () => {
   const name = useInput('');
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const hasResults = Boolean(results.length);
+  const cols = ['name', 'id', 'level'];
+  const formattedResults = results.reduce((acc, cur) => {
+    const obj = {
+      ...cur,
+      name: <Link to={`/profile/${cur.id}`}>{cur.name}</Link>,
+    };
+    acc.push(obj);
+    return acc;
+  }, []);
   const onClickHandler = async () => {
     try {
-      setResults(null);
+      setResults([]);
       setLoading(true);
       const response = await api(`user/findUser?name=${name.value}`);
       const json = await response.json();
@@ -24,7 +35,6 @@ const Search = () => {
       console.error('something broke', err);
     }
   };
-  const cols = ['name', 'id', 'level'];
   return (
     <Page withSidebar>
       <h2>Search</h2>
@@ -44,13 +54,13 @@ const Search = () => {
         search
       </Button>
       {loading && <Spinner />}
-      {results && (
+      {hasResults && (
         <div className="search-results">
           <h3>results</h3>
           {results.length ? (
             <Table
               cols={cols}
-              rows={results}
+              rows={formattedResults}
             />
           ) : (
               <p>no results</p>
