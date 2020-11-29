@@ -18,7 +18,7 @@ const Arena = () => {
     console.log(level.value);
   };
   return (
-    <Page>
+    <Page withSidebar>
       <h2>Welcome to the arena!</h2>
       <p>Choose your challenge level</p>
       <Select

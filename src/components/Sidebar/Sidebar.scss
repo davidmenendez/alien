@@ -1,0 +1,16 @@
+.sidebar {
+  text-align: center;
+
+  .alien {
+    max-width: 10rem;
+  }
+}
+
+.sidebar-layout {
+  display: flex;
+  flex-direction: row;
+
+  .page-content {
+    flex: 1;
+  }
+}
