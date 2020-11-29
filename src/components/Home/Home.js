@@ -6,6 +6,8 @@ import './Home.scss';
 
 const Home = () => {
   const { user } = useSelector(state => state.user);
+  const getUserCols = () => Object.keys(user);
+  const userCols = getUserCols();
   return (
     <Page>
       <header className="home-header">
@@ -13,15 +15,15 @@ const Home = () => {
         <AlienIcon fill={user.color} />
       </header>
       <p>user info</p>
-      <table>
+      <table className="table">
         <thead>
           <tr>
-            {Object.keys(user).map(o => <th key={o} scope="col">{o}</th>)}
+            {userCols.map(o => <th key={o} scope="col">{o}</th>)}
           </tr>
         </thead>
         <tbody>
           <tr>
-            {Object.keys(user).map(o => <td key={o}>{user[o]}</td>)}
+            {userCols.map(o => <td key={o}>{user[o]}</td>)}
           </tr>
         </tbody>
       </table>

@@ -28,12 +28,18 @@ const User = new Schema(
       maxlength: 30,
       minlength: 3,
     },
+    credits: {
+      type: Number,
+      maxlength: 10,
+      minlength: 1,
+      default: 5000,
+    },
   },
   {
     timestamps: {
       createdAt: 'created_at',
     },
-  }
+  },
 );
 
 module.exports = mongoose.model('Users', User);

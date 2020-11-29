@@ -57,6 +57,7 @@ exports.getUser = async (req, res, next) => {
       email: user.email,
       color: user.color,
       age: getAge(user.created_at),
+      credits: user.credits,
     };
     return res.status(200).json({ user: data });
   } catch (err) {
