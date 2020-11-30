@@ -70,7 +70,6 @@ exports.user = async (req, res, next) => {
 exports.profile = async (req, res, next) => {
   try {
     const { id } = req.query;
-    console.log(id);
     const user = await User.findById(id);
     if (!user) return res.status(400).send({ error: 'user not found' });
     const data = {
@@ -96,6 +95,21 @@ exports.search = async (req, res, next) => {
       name: entry.name,
     }));
     return res.status(200).json({ results });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.bank = async (req, res, next) => {
+  try {
+    const { credits } = req.body;
+    const { id } = req.user;
+    const user = await User.findById(id);
+    if (!user) return res.status(400).send({ error: 'user not found' });
+    const newAmount = user.credits + Number(credits);
+    user.credits = newAmount;
+    user.save();
+    return res.sendStatus(200);
   } catch (err) {
     return next(err);
   }

@@ -10,7 +10,7 @@ import './Nav.scss';
 const Nav = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const links = ['home', 'search', 'arena'];
+  const links = ['home', 'search', 'arena', 'bank'];
   const logoutHandler = e => {
     e.preventDefault();
     localStorage.removeItem('alienToken');

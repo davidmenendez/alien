@@ -9,5 +9,6 @@ router.post('/login', userController.login);
 router.get('/', auth, userController.user);
 router.get('/search', auth, userController.search);
 router.get('/profile', auth, userController.profile);
+router.put('/bank', auth, userController.bank);
 
 module.exports = router;
