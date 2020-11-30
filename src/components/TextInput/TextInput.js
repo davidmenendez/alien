@@ -19,6 +19,7 @@ const TextInput = ({
         onChange={onChange}
         value={value}
         className="input"
+        autoComplete="off"
       />
     </div>
   );

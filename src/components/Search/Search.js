@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  Link,
+  useHistory,
+} from 'react-router-dom';
 import Page from '../Page';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
@@ -7,13 +10,18 @@ import api from '../../utils/api';
 import Button from '../Button';
 import Table from '../Table';
 import Spinner from '../Spinner';
+import { getUrlParameterValue } from '../../utils/url';
 
 const Search = () => {
-  const name = useInput('');
+  const history = useHistory();
+  const name = useInput(getUrlParameterValue('query') || '');
+  const [previouslySearched, setPreviouslySearched] = useState(getUrlParameterValue('query'));
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const hasResults = Boolean(results.length);
+  const hasPreviousSearch = previouslySearched !== null;
   const cols = ['name', 'id', 'level'];
+
   const formattedResults = results.reduce((acc, cur) => {
     const obj = {
       ...cur,
@@ -22,19 +30,37 @@ const Search = () => {
     acc.push(obj);
     return acc;
   }, []);
-  const onClickHandler = async () => {
-    try {
-      setResults([]);
-      setLoading(true);
-      const response = await api(`user/search?name=${name.value}`);
-      const json = await response.json();
-      setResults(json.results);
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      console.error('something broke', err);
-    }
+
+  const searchUsers = useCallback(
+    async query => {
+      try {
+        setResults([]);
+        setLoading(true);
+        const response = await api(`user/search?query=${query}`);
+        const json = await response.json();
+        setResults(json.results);
+        setLoading(false);
+        setPreviouslySearched(query);
+        history.push(`search?query=${query}`);
+      } catch (err) {
+        setLoading(false);
+        console.error('something broke', err);
+      }
+    },
+    [history]
+  );
+
+  const onClickHandler = () => {
+    searchUsers(name.value);
   };
+
+  useEffect(() => {
+    const initialQuery = getUrlParameterValue('query');
+    if (window.location.search && initialQuery !== null) {
+      searchUsers(initialQuery);
+    }
+  }, [searchUsers]);
+
   return (
     <Page withSidebar>
       <h2>Search</h2>
@@ -54,16 +80,16 @@ const Search = () => {
         search
       </Button>
       {loading && <Spinner />}
-      {hasResults && (
+      {hasPreviousSearch && (
         <div className="search-results">
-          <h3>results</h3>
-          {results.length ? (
+          <h3>search results for "{previouslySearched}"</h3>
+          {hasResults ? (
             <Table
               cols={cols}
               rows={formattedResults}
             />
           ) : (
-              <p>no results</p>
+              <p>Nothing found. Try again!</p>
             )}
         </div>
       )}

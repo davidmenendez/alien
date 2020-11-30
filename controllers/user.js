@@ -87,9 +87,9 @@ exports.profile = async (req, res, next) => {
 
 exports.search = async (req, res, next) => {
   try {
-    const { name } = req.query;
-    const query = new RegExp(name, 'i');
-    const data = await User.find({ name: query });
+    const { query } = req.query;
+    const queryRegex = new RegExp(query, 'i');
+    const data = await User.find({ name: queryRegex });
     const results = data.map(entry => ({
       id: entry._id,
       level: entry.level,
