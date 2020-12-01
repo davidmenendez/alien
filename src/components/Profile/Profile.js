@@ -29,7 +29,7 @@ const Profile = () => {
   }, [id]);
 
   return (
-    <Page withSidebar>
+    <>
       {loading && <Spinner />}
       {profile && (
         <div>
@@ -44,7 +44,7 @@ const Profile = () => {
           />
         </div>
       )}
-    </Page>
+    </>
   );
 };
 

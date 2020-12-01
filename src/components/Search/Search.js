@@ -62,7 +62,7 @@ const Search = () => {
   }, [searchUsers]);
 
   return (
-    <Page withSidebar>
+    <>
       <h2>Search</h2>
       <h3>Find other aliens</h3>
       <TextInput
@@ -93,7 +93,7 @@ const Search = () => {
             )}
         </div>
       )}
-    </Page>
+    </>
   );
 };
 

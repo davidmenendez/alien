@@ -3,13 +3,22 @@ import {
   Redirect,
   Route,
 } from 'react-router-dom';
+import Page from '../Page';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({
+  component: Component,
+  withSidebar,
+  ...rest
+}) => {
   const token = localStorage.getItem('alienToken');
   const route = (
     <Route {...rest} render={props => {
       if (!token) return <Redirect to="/" />
-      return <Component {...props} />
+      return (
+        <Page withSidebar={withSidebar}>
+          <Component {...props} />
+        </Page>
+      );
     }} />
   );
   return route;

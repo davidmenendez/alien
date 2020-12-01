@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Page from '../Page';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import api from '../../utils/api';
@@ -24,7 +23,7 @@ const Bank = () => {
     }
   };
   return (
-    <Page withSidebar>
+    <>
       <h2>The bank</h2>
       <h3>Add more credits while supplies last!</h3>
       <p>You currently have {user.credits.toLocaleString()} credits</p>
@@ -43,7 +42,7 @@ const Bank = () => {
       >
         Add
       </Button>
-    </Page>
+    </>
   );
 };
 

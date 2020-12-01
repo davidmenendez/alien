@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Page from '../Page';
 import Select from '../Select';
 import useInput from '../../hooks/useInput';
 import Button from '../Button';
@@ -31,7 +30,7 @@ const Arena = () => {
     setLoading(false);
   };
   return (
-    <Page withSidebar>
+    <>
       <h2>Welcome to the arena!</h2>
       <h3>Choose your challenge level</h3>
       <Select
@@ -49,7 +48,7 @@ const Arena = () => {
       </Button>
       {loading && <Spinner />}
       {log && log.map((row, id) => <p key={id}>{row}</p>)}
-    </Page>
+    </>
   );
 };
 
