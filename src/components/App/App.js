@@ -12,6 +12,7 @@ import Search from '../Search';
 import Arena from '../Arena';
 import Profile from '../Profile';
 import Bank from '../Bank';
+import NotFound from '../NotFound';
 import './App.scss';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <PrivateRoute exact path="/arena" component={Arena} withSidebar />
         <PrivateRoute exact path="/profile/:id" component={Profile} withSidebar />
         <PrivateRoute exact path="/bank" component={Bank} withSidebar />
+        <Route component={NotFound} />
       </Switch>
     </Router>
   );
