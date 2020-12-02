@@ -6,6 +6,12 @@ import './Home.scss';
 
 const Home = () => {
   const { user } = useSelector(state => state.user);
+  const formattedUser = {
+    ...user,
+    credits: user.credits.toLocaleString(),
+  };
+  const rows = [formattedUser];
+  const cols = Object.keys(formattedUser);
   return (
     <>
       <header className="home-header">
@@ -14,8 +20,8 @@ const Home = () => {
       </header>
       <p>user info</p>
       <Table
-        cols={Object.keys(user)}
-        rows={[user]}
+        cols={cols}
+        rows={rows}
       />
     </>
   );

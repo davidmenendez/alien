@@ -8,7 +8,7 @@ import { fetchUser } from '../../features/user/userSlice';
 const Bank = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
-  const [credits, setCredits] = useState('');
+  const [credits, setCredits] = useState(user.credits);
   const onClickHandler = async () => {
     try {
       await api('user/bank', {
@@ -33,14 +33,14 @@ const Bank = () => {
         label="Amount"
         onChange={e => setCredits(e.target.value)}
         id="credits"
-        valie={credits}
+        value={credits}
       />
       <Button
         type="primary"
         onClick={onClickHandler}
         disabled={!credits}
       >
-        Add
+        Save
       </Button>
     </>
   );

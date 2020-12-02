@@ -106,8 +106,7 @@ exports.bank = async (req, res, next) => {
     const { id } = req.user;
     const user = await User.findById(id);
     if (!user) return res.status(400).send({ error: 'user not found' });
-    const newAmount = user.credits + Number(credits);
-    user.credits = newAmount;
+    user.credits = credits;
     user.save();
     return res.sendStatus(200);
   } catch (err) {
