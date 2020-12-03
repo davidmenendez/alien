@@ -1,0 +1,15 @@
+.landing {
+  width: 100%;
+  background: #eee;
+  color: #000;
+  text-align: center;
+  max-width: 560px;
+  padding: 16px;
+}
+
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

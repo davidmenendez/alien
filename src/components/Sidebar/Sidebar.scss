@@ -1,23 +1,8 @@
-@import '../../styles/breakpoints';
-
 .sidebar {
   text-align: center;
   flex: 0 0 10rem;
 
   .alien {
     max-width: 10rem;
-  }
-}
-
-.sidebar-layout {
-  display: flex;
-  flex-direction: column;
-
-  @include breakpoint(sm) {
-    flex-direction: row;
-  }
-
-  .page-content {
-    flex: 1 0 auto;
   }
 }

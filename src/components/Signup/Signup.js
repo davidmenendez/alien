@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import {
   Link,
   useHistory,
-  Redirect,
 } from 'react-router-dom';
-import {
-  useSelector,
-  useDispatch,
-} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchUser } from '../../features/user/userSlice';
 import Select from '../Select';
 import TextInput from '../TextInput';
@@ -16,7 +12,6 @@ import Button from '../Button';
 import './Signup.scss';
 
 const Signup = () => {
-  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState('');
@@ -64,58 +59,54 @@ const Signup = () => {
     !password.value
   );
 
-  if (user.loggedIn) return <Redirect to="/home" />;
-
   return (
-    <section className="signup">
-      <div className="signup-container">
-        <h1>ALIEN!</h1>
-        <h2>Welcome to the battle</h2>
-        <h3>Sign up below</h3>
-        <TextInput
-          id="name"
-          label="name"
-          onChange={name.onChange}
-          placeholder="name"
-          type="text"
-          value={name.value}
-        />
-        <Select
-          id="color"
-          label="color"
-          onChange={color.onChange}
-          options={colors}
-          value={color.value}
-        />
-        <TextInput
-          id="email"
-          label="email"
-          onChange={email.onChange}
-          placeholder="email"
-          type="email"
-          value={email.value}
-        />
-        <TextInput
-          id="password"
-          label="password"
-          onChange={password.onChange}
-          placeholder="password"
-          type="password"
-          value={password.value}
-        />
-        <Button
-          onClick={onClickHandler}
-          type="primary"
-          disabled={buttonDisabled}
-        >
-          Join
+    <>
+      <h1>ALIEN!</h1>
+      <h2>Welcome to the battle</h2>
+      <h3>Sign up below</h3>
+      <TextInput
+        id="name"
+        label="name"
+        onChange={name.onChange}
+        placeholder="name"
+        type="text"
+        value={name.value}
+      />
+      <Select
+        id="color"
+        label="color"
+        onChange={color.onChange}
+        options={colors}
+        value={color.value}
+      />
+      <TextInput
+        id="email"
+        label="email"
+        onChange={email.onChange}
+        placeholder="email"
+        type="email"
+        value={email.value}
+      />
+      <TextInput
+        id="password"
+        label="password"
+        onChange={password.onChange}
+        placeholder="password"
+        type="password"
+        value={password.value}
+      />
+      <Button
+        onClick={onClickHandler}
+        type="primary"
+        disabled={buttonDisabled}
+      >
+        Join
         </Button>
-        {loading && <p>loading...</p>}
-        {error && <p>{error}</p>}
-        <hr />
-        <Link to="/">Have an account? Log in</Link>
-      </div>
-    </section>
+      {loading && <p>loading...</p>}
+      {error && <p>{error}</p>}
+      <hr />
+      <Link to="/">Have an account? Log in</Link>
+    </>
   );
 };
 

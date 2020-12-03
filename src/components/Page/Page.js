@@ -1,35 +1,31 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Spinner from '../Spinner';
 import Nav from '../Nav';
 import Sidebar from '../Sidebar';
+import Spinner from '../Spinner';
 import './Page.scss';
 
 const Page = ({
   children,
-  withSidebar,
+  sidebar,
 }) => {
   const { status } = useSelector(state => state.user);
-  if (status === 'failed') return <Redirect to="/" />;
-  const contentClasses = ['page-content'];
-  if (withSidebar) contentClasses.push('sidebar-layout');
+  const layoutClasses = ['page-layout'];
+  if (sidebar) layoutClasses.push('page-layout--sidebar')
   return (
     <div className="page">
       <Nav />
-      <div className="page-container">
-        <div className="container">
-          {status === 'loading' ? (
-            <Spinner />
-          ) : (
-              <div className={withSidebar ? 'sidebar-layout': ''}>
-                {withSidebar && <Sidebar />}
-                <section className="page-content">
-                  {children}
-                </section>
-              </div>
-            )}
-        </div>
+      <div className="container">
+        {status === 'loading' ? (
+          <Spinner />
+        ) : (
+            <div className={layoutClasses.join(' ')}>
+              {sidebar && <Sidebar />}
+              <section className="page-content">
+                {children}
+              </section>
+            </div>
+          )}
       </div>
     </div>
   );

@@ -6,6 +6,12 @@ const generateAccessToken = id => {
   return jwt.sign({ id }, process.env.AUTH_SECRET, { expiresIn: '1h' });
 };
 
+const timer = ms => {
+  return new Promise(res => {
+    setTimeout(res, ms);
+  });
+};
+
 const getAge = created => {
   const now = new Date();
   const then = new Date(created);
@@ -49,6 +55,7 @@ exports.login = async (req, res, next) => {
 
 exports.user = async (req, res, next) => {
   try {
+    await timer(100);
     const { id } = req.user;
     const user = await User.findById(id);
     if (!user) return res.status(400).send({ error: 'user not found' });

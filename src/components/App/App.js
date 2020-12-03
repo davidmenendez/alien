@@ -13,19 +13,28 @@ import Arena from '../Arena';
 import Profile from '../Profile';
 import Bank from '../Bank';
 import NotFound from '../NotFound';
+import Landing from '../Landing';
 import './App.scss';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/" render={() => (
+          <Landing>
+            <Login />
+          </Landing>
+        )} />
+        <Route exact path="/signup" render={() => (
+          <Landing>
+            <Signup />
+          </Landing>
+        )} />
         <PrivateRoute exact path="/home" component={Home} />
-        <PrivateRoute exact path="/search" component={Search} withSidebar />
-        <PrivateRoute exact path="/arena" component={Arena} withSidebar />
-        <PrivateRoute exact path="/profile/:id" component={Profile} withSidebar />
-        <PrivateRoute exact path="/bank" component={Bank} withSidebar />
+        <PrivateRoute exact path="/search" component={Search} sidebar />
+        <PrivateRoute exact path="/arena" component={Arena} sidebar />
+        <PrivateRoute exact path="/profile/:id" component={Profile} sidebar />
+        <PrivateRoute exact path="/bank" component={Bank} sidebar />
         <Route component={NotFound} />
       </Switch>
     </Router>

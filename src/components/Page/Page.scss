@@ -1,5 +1,19 @@
-.page {
-  &-container {
-    padding-top: 1rem;
+@import '../../styles/breakpoints';
+
+.page-layout {
+  margin-top: 1rem;
+  display: flex;
+
+  &--sidebar {
+    flex-direction: column;
+
+    @include breakpoint(sm) {
+      flex-direction: row;
+    }
   }
+}
+
+.page-content {
+  flex: 1 0 auto;
+  margin-left: 1rem;
 }
