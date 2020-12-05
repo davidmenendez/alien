@@ -1,17 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import AlienIcon from '../AlienIcon';
-import Table from '../Table';
 import './Home.scss';
 
 const Home = () => {
   const { user } = useSelector(state => state.user);
-  const formattedUser = {
-    ...user,
-    credits: user.credits.toLocaleString(),
-  };
-  const rows = [formattedUser];
-  const cols = Object.keys(formattedUser);
   return (
     <>
       <header className="home-header">
@@ -19,10 +12,16 @@ const Home = () => {
         <AlienIcon fill={user.color} />
       </header>
       <p>user info</p>
-      <Table
-        cols={cols}
-        rows={rows}
-      />
+      <table className="table">
+        <tbody>
+          {Object.keys(user).map(prop => (
+            <tr key={prop}>
+              <th>{prop}</th>
+              <td>{user[prop]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };
