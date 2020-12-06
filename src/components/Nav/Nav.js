@@ -11,7 +11,7 @@ const Nav = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const links = ['home', 'search', 'arena', 'bank'];
+  const links = ['home', 'hub'];
 
   const logoutHandler = e => {
     e.preventDefault();
@@ -35,7 +35,7 @@ const Nav = () => {
     <nav className={navClasses.join(' ')}>
       <div className="container">
         <div className="nav-head">
-          <h1>ALIEN</h1>
+          <h1>INRITH</h1>
           <div className="nav-toggle" onClick={navToggleHandler}>
             <span></span>
             <span></span>

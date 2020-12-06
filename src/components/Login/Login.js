@@ -49,8 +49,8 @@ const Login = () => {
 
   return (
     <>
-      <h1>ALIEN!</h1>
-      <h2>Welcome to the battle</h2>
+      <h1>INRITH</h1>
+      <h2>Welcome to the battle spehere</h2>
       <h3>Login</h3>
       <TextInput
         id="email"

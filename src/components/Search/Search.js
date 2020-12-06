@@ -63,7 +63,7 @@ const Search = () => {
 
   return (
     <>
-      <h2>Search</h2>
+      <h2 className="page-header">Search</h2>
       <h3>Find other aliens</h3>
       <TextInput
         id="name"

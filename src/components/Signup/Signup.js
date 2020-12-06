@@ -61,8 +61,8 @@ const Signup = () => {
 
   return (
     <>
-      <h1>ALIEN!</h1>
-      <h2>Welcome to the battle</h2>
+      <h1>INRITH!</h1>
+      <h2>Welcome to the battle sphere</h2>
       <h3>Sign up below</h3>
       <TextInput
         id="name"

@@ -24,7 +24,7 @@ const Bank = () => {
   };
   return (
     <>
-      <h2>The bank</h2>
+      <h2 className="page-header">The bank</h2>
       <h3>Add more credits while supplies last!</h3>
       <p>You currently have {user.credits.toLocaleString()} credits</p>
       <TextInput

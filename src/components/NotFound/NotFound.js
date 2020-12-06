@@ -6,7 +6,7 @@ const NotFound = () => (
   <div className="not-found">
     <div className="countainer">
       <h1 className="jumbo">404</h1>
-      <Link to="/">Return to ALIEN home page</Link>
+      <Link to="/">Return to INRITH</Link>
     </div>
   </div>
 );

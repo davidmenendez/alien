@@ -31,7 +31,7 @@ const Arena = () => {
   };
   return (
     <>
-      <h2>Welcome to the arena!</h2>
+      <h2 className="page-header">Welcome to the arena!</h2>
       <h3>Choose your challenge level</h3>
       <Select
         id="level"
