@@ -15,4 +15,8 @@
 
 .page-content {
   flex: 1;
+
+  @include breakpoint(sm) {
+    padding-left: 1rem;
+  }
 }

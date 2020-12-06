@@ -40,6 +40,18 @@ const User = new Schema(
       minlength: 1,
       default: 1,
     },
+    maxHp: {
+      type: Number,
+      maxlength: 9,
+      minlength: 1,
+      default: 25,
+    },
+    currentHp: {
+      type: Number,
+      maxlength: 9,
+      minlength: 1,
+      default: 25,
+    },
   },
   {
     timestamps: {

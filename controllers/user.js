@@ -67,6 +67,8 @@ exports.user = async (req, res, next) => {
       age: getAge(user.created_at),
       credits: user.credits,
       level: user.level,
+      maxHp: user.maxHp,
+      currentHp: user.currentHp,
     };
     return res.status(200).json({ user: data });
   } catch (err) {

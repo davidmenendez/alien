@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import AlienIcon from '../AlienIcon';
+import HealthBar from '../HealthBar';
 import './Home.scss';
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
       <header className="home-header">
         <h3>welcome home, {formattedUser.name}!</h3>
         <AlienIcon fill={formattedUser.color} />
+        <HealthBar large />
       </header>
       <p>user info</p>
       <table className="table">
