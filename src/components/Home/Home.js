@@ -5,19 +5,23 @@ import './Home.scss';
 
 const Home = () => {
   const { user } = useSelector(state => state.user);
+  const formattedUser = {
+    ...user,
+    credits: user.credits.toLocaleString(),
+  };
   return (
     <>
       <header className="home-header">
-        <h3>welcome home, {user.name}!</h3>
-        <AlienIcon fill={user.color} />
+        <h3>welcome home, {formattedUser.name}!</h3>
+        <AlienIcon fill={formattedUser.color} />
       </header>
       <p>user info</p>
       <table className="table">
         <tbody>
-          {Object.keys(user).map(prop => (
+          {Object.keys(formattedUser).map(prop => (
             <tr key={prop}>
               <th>{prop}</th>
-              <td>{user[prop]}</td>
+              <td>{formattedUser[prop]}</td>
             </tr>
           ))}
         </tbody>
