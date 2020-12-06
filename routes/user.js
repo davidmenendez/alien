@@ -10,5 +10,6 @@ router.get('/', auth, userController.user);
 router.get('/search', auth, userController.search);
 router.get('/profile', auth, userController.profile);
 router.put('/bank', auth, userController.bank);
+router.post('/heal', auth, userController.heal);
 
 module.exports = router;

@@ -7,7 +7,7 @@ import Page from '../Page';
 
 const PrivateRoute = ({
   component: Component,
-  sidebar,
+  noSidebar,
   ...rest
 }) => {
   const token = localStorage.getItem('alienToken');
@@ -15,7 +15,7 @@ const PrivateRoute = ({
     <Route {...rest} render={props => {
       if (!token) return <Redirect to="/" />
       return (
-        <Page sidebar={sidebar}>
+        <Page sidebar={noSidebar}>
           <Component {...props} />
         </Page>
       );

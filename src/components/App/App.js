@@ -15,6 +15,7 @@ import Bank from '../Bank';
 import NotFound from '../NotFound';
 import Landing from '../Landing';
 import Hub from '../Hub';
+import Hospital from '../Hospital';
 import './App.scss';
 
 function App() {
@@ -31,12 +32,13 @@ function App() {
             <Signup />
           </Landing>
         )} />
-        <PrivateRoute exact path="/home" component={Home} />
-        <PrivateRoute exact path="/search" component={Search} sidebar />
-        <PrivateRoute exact path="/arena" component={Arena} sidebar />
-        <PrivateRoute exact path="/profile/:id" component={Profile} sidebar />
-        <PrivateRoute exact path="/bank" component={Bank} sidebar />
-        <PrivateRoute exact path="/hub" component={Hub} sidebar />
+        <PrivateRoute exact path="/home" component={Home} noSidebar />
+        <PrivateRoute exact path="/search" component={Search} />
+        <PrivateRoute exact path="/arena" component={Arena} />
+        <PrivateRoute exact path="/profile/:id" component={Profile} />
+        <PrivateRoute exact path="/bank" component={Bank} />
+        <PrivateRoute exact path="/hub" component={Hub} />
+        <PrivateRoute exact path="/hospital" component={Hospital} />
         <Route component={NotFound} />
       </Switch>
     </Router>

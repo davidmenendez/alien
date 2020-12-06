@@ -8,11 +8,11 @@ import './Page.scss';
 
 const Page = ({
   children,
-  sidebar,
+  noSidebar,
 }) => {
   const { status, loggedIn } = useSelector(state => state.user);
   const layoutClasses = ['page-layout', 'container'];
-  if (sidebar) layoutClasses.push('page-layout--sidebar');
+  if (noSidebar) layoutClasses.push('page-layout--sidebar');
   if (status !== 'loading' && !loggedIn) return <Redirect to="/" />
   return (
     <div className="page">
@@ -21,7 +21,7 @@ const Page = ({
         <Spinner />
       ) : (
           <div className={layoutClasses.join(' ')}>
-            {sidebar && <Sidebar />}
+        {!noSidebar && <Sidebar />}
             <section className="page-content">
               {children}
             </section>

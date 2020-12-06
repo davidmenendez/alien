@@ -122,3 +122,17 @@ exports.bank = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.heal = async (req, res, next) => {
+  console.log('fart');
+  try {
+    const { id } = req.user;
+    const user = await User.findById(id);
+    if (!user) return res.status(400).send({ error: 'user not found' });
+    user.currentHp = user.maxHp;
+    user.save();
+    return res.sendStatus(200);
+  } catch (err) {
+    return next(err);
+  }
+};
