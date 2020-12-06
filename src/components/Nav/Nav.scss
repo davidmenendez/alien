@@ -1,4 +1,5 @@
 @import '../../styles/colors';
+@import '../../styles/breakpoints';
 
 .nav {
   background: #222;
@@ -16,19 +17,65 @@
   .container {
     display: flex;
     justify-content: space-between;
-  }
+    flex-direction: column;
 
-  &--active {
-    text-decoration: underline;
+    @include breakpoint(sm) {
+      flex-direction: row;
+    }
   }
+}
 
-  &-links {
-    display: flex;
-    margin: 0 -1rem;
+.nav--active {
+  text-decoration: underline;
+}
+
+.nav-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  margin: 0 -1rem;
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+  max-height: 0;
+  transition: all 100ms linear;
+
+  @include breakpoint(sm) {
+    flex-direction: row;
+    max-height: none;
   }
+}
 
-  &-link {
+.nav--open .nav-links {
+  max-height: 200px;
+}
+
+.nav-link {
+  padding: .5rem 0;
+  text-transform: capitalize;
+
+  @include breakpoint(sm) {
     padding: 0 1rem;
-    text-transform: capitalize;
+  }
+}
+
+.nav-toggle {
+  width: 40px;
+  cursor: pointer;
+  display: inline-block;
+
+  @include breakpoint(sm) {
+    display: none;
+  }
+
+  span {
+    height: 4px;
+    background: $green;
+    display: block;
+    margin-bottom: 4px;
   }
 }
