@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Page from '../Page';
 import Table from '../Table';
 import Spinner from '../Spinner';
 import AlienIcon from '../AlienIcon';

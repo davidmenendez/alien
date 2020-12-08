@@ -32,7 +32,7 @@ function App() {
             <Signup />
           </Landing>
         )} />
-        <PrivateRoute exact path="/home" component={Home} noSidebar />
+        <PrivateRoute exact path="/home" component={Home} sidebar={false} />
         <PrivateRoute exact path="/search" component={Search} />
         <PrivateRoute exact path="/arena" component={Arena} />
         <PrivateRoute exact path="/profile/:id" component={Profile} />

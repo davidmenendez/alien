@@ -3,7 +3,6 @@ import {
   Link,
   useHistory,
 } from 'react-router-dom';
-import Page from '../Page';
 import TextInput from '../TextInput';
 import useInput from '../../hooks/useInput';
 import api from '../../utils/api';

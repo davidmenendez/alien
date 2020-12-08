@@ -116,7 +116,7 @@ exports.bank = async (req, res, next) => {
     const user = await User.findById(id);
     if (!user) return res.status(400).send({ error: 'user not found' });
     user.credits = credits;
-    user.save();
+    await user.save();
     return res.sendStatus(200);
   } catch (err) {
     return next(err);
@@ -124,13 +124,12 @@ exports.bank = async (req, res, next) => {
 };
 
 exports.heal = async (req, res, next) => {
-  console.log('fart');
   try {
     const { id } = req.user;
     const user = await User.findById(id);
     if (!user) return res.status(400).send({ error: 'user not found' });
     user.currentHp = user.maxHp;
-    user.save();
+    await user.save();
     return res.sendStatus(200);
   } catch (err) {
     return next(err);
