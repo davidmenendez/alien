@@ -55,7 +55,7 @@ exports.login = async (req, res, next) => {
 
 exports.user = async (req, res, next) => {
   try {
-    await timer(100);
+    // await timer(100);
     const { id } = req.user;
     const user = await User.findById(id);
     if (!user) return res.status(400).send({ error: 'user not found' });

@@ -2,10 +2,17 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import AlienIcon from '../AlienIcon';
 import HealthBar from '../HealthBar';
+import Spinner from '../Spinner';
 import './Home.scss';
 
 const Home = () => {
-  const { user } = useSelector(state => state.user);
+  const {
+    user,
+    status,
+  } = useSelector(state => state.user);
+
+  if (status === 'loading') return <Spinner />;
+
   const formattedUser = {
     ...user,
     credits: user.credits.toLocaleString(),

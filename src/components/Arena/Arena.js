@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Select from '../Select';
 import useInput from '../../hooks/useInput';
 import Button from '../Button';
 import Spinner from '../Spinner';
 import api from '../../utils/api';
+import { fetchUser } from '../../features/user/userSlice';
 
 const Arena = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [log, setLog] = useState(null);
   const level = useInput(1);
@@ -28,6 +31,7 @@ const Arena = () => {
     const { data } = await response.json();
     setLog(data);
     setLoading(false);
+    dispatch(fetchUser());
   };
   return (
     <>

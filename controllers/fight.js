@@ -1,3 +1,5 @@
+const User = require('../models/user');
+
 const randomNum = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -36,7 +38,11 @@ const botFight = level => {
 
 exports.bot = async (req, res, next) => {
   try {
+    const { id } = req.user;
     const { level } = req.body;
+    const user = await User.findById(id);
+    user.credits = user.credits + 50;
+    user.save();
     const [userWin, log] = botFight(level);
     return res.status(200).json({ data: log });
   } catch (err) {

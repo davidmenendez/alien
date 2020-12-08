@@ -4,10 +4,14 @@ import TextInput from '../TextInput';
 import Button from '../Button';
 import api from '../../utils/api';
 import { fetchUser } from '../../features/user/userSlice';
+import Spinner from '../Spinner';
 
 const Bank = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector(state => state.user);
+  const {
+    user,
+    status,
+  } = useSelector(state => state.user);
   const [credits, setCredits] = useState(user.credits);
   const onClickHandler = async () => {
     try {
@@ -22,6 +26,7 @@ const Bank = () => {
       console.error('something broke', err);
     }
   };
+  if (status === 'loading') return <Spinner />;
   return (
     <>
       <h2 className="page-header">The bank</h2>

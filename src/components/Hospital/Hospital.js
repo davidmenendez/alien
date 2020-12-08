@@ -3,9 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import api from '../../utils/api';
 import { fetchUser } from '../../features/user/userSlice';
+import Spinner from '../Spinner';
 
 const Hospital = () => {
-  const { user } = useSelector(state => state.user);
+  const {
+    user,
+    status,
+  } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const {
     maxHp,
@@ -26,6 +30,7 @@ const Hospital = () => {
     }
   };
 
+  if (status === 'loading') return <Spinner />;
   return (
     <>
       <h2 className="page-header">The Hospital</h2>

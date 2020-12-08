@@ -22,16 +22,16 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" render={() => (
+        <Route exact path="/">
           <Landing>
             <Login />
           </Landing>
-        )} />
-        <Route exact path="/signup" render={() => (
+        </Route>
+        <Route exact path="/signup">
           <Landing>
             <Signup />
           </Landing>
-        )} />
+        </Route>
         <PrivateRoute exact path="/home" component={Home} sidebar={false} />
         <PrivateRoute exact path="/search" component={Search} />
         <PrivateRoute exact path="/arena" component={Arena} />
