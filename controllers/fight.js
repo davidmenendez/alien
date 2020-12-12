@@ -4,36 +4,32 @@ const randomNum = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const botFight = level => {
+const botFight = (currentHp, maxHp, level) => {
   const log = ['FIGHT BEGINS!'];
-  const userMax = 500;
   const userMin = 5;
-  let userHP = 20;
   const botMax = 3;
   const botMin = 1;
   let botHP = level * 20;
-  let userWin;
 
   while (true) {
-    const userAttack = randomNum(userMax, userMin)
+    const userAttack = randomNum(maxHp, userMin)
     botHP = botHP - userAttack;
     log.push(`user attacks for ${userAttack}. bot has ${botHP} health remaning`);
     if (botHP <= 0) {
       log.push('user wins!');
-      userWin = true;
       break;
     }
     const botAttack = randomNum(botMax, botMin)
-    userHP = userHP - botAttack;
-    log.push(`bot attacks for ${botAttack}. user has ${userHP} health remaning`);
-    if (userHP <= 0) {
+    currentHp = currentHp - botAttack;
+    if (currentHp < 0) currentHp = 0;
+    log.push(`bot attacks for ${botAttack}. user has ${currentHp} health remaning`);
+    if (currentHp <= 0) {
       log.push('bot wins!');
-      userWin = false;
       break;
     }
   }
 
-  return [userWin, log];
+  return [currentHp, log];
 };
 
 exports.bot = async (req, res, next) => {
@@ -41,9 +37,14 @@ exports.bot = async (req, res, next) => {
     const { id } = req.user;
     const { level } = req.body;
     const user = await User.findById(id);
-    user.credits = user.credits + 50;
+    const {
+      maxHp,
+      currentHp,
+    } = user;
+    const [postFighHp, log] = botFight(currentHp, maxHp, level);
+    user.credits = user.credits + 10;
+    user.currentHp = postFighHp;
     user.save();
-    const [userWin, log] = botFight(level);
     return res.status(200).json({ data: log });
   } catch (err) {
     return next(err);
