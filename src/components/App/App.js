@@ -16,6 +16,7 @@ import NotFound from '../NotFound';
 import Landing from '../Landing';
 import Hub from '../Hub';
 import Hospital from '../Hospital';
+import Armory from '../Armory';
 import './App.scss';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <PrivateRoute exact path="/bank" component={Bank} />
         <PrivateRoute exact path="/hub" component={Hub} />
         <PrivateRoute exact path="/hospital" component={Hospital} />
+        <PrivateRoute exact path="/armory" component={Armory} />
         <Route component={NotFound} />
       </Switch>
     </Router>

@@ -2,7 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Hub = () => {
-  const links = ['home', 'arena', 'bank', 'search', 'hospital'].sort((a, b) => a.localeCompare(b));
+  const links = [
+    'home',
+    'arena',
+    'bank',
+    'search',
+    'hospital',
+    'armory',
+  ].sort((a, b) => a.localeCompare(b));
   return (
     <>
       <div className="page-header">

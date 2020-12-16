@@ -43,21 +43,25 @@ const Arena = () => {
     <>
       <h2 className="page-header">Welcome to the arena!</h2>
       <h3>Choose your challenge level</h3>
-      {dead && <p>you dead, boy. get on down to the <Link to="/hospital">hospital</Link>. with ya broke ass.</p>}
-      <Select
-        id="level"
-        label="Level"
-        value={level.value}
-        onChange={level.onChange}
-        options={getLevels()}
-      />
-      <Button
-        type="primary"
-        onClick={onClickHandler}
-        disabled={user.currentHp === 0}
-      >
-        Battle!
-      </Button>
+      {dead ? (
+        <p>You appear to be dead. Better get on down to the <Link to="/hospital">hospital</Link>.</p>
+      ) : (
+          <>
+            <Select
+              id="level"
+              label="Level"
+              value={level.value}
+              onChange={level.onChange}
+              options={getLevels()}
+            />
+            <Button
+              type="primary"
+              onClick={onClickHandler}
+            >
+              Battle!
+            </Button>
+          </>
+        )}
       {loading && <Spinner />}
       {log && log.map((row, id) => <p key={id}>{row}</p>)}
     </>
